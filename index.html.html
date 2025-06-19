@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>4-Page Confession</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #ffe6f0);
+      overflow: hidden;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    .page {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: 40px 20px;
+      text-align: center;
+      transition: opacity 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #page1:checked ~ .page1,
+    #page2:checked ~ .page2,
+    #page3:checked ~ .page3,
+    #page4:checked ~ .page4 {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    .title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      color: #d6336c;
+      margin-bottom: 20px;
+    }
+
+    .btn-heart {
+      font-size: 80px;
+      cursor: pointer;
+      color: #ff4d6d;
+      transition: transform 0.3s ease;
+      user-select: none;
+    }
+
+    .btn-heart:hover {
+      transform: scale(1.2);
+    }
+
+    .btn {
+      font-size: 18px;
+      background: #ff4d6d;
+      color: white;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      user-select: none;
+      margin: 10px 5px;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-buttons {
+      margin-top: 30px;
+    }
+
+    .heart-float {
+      position: fixed;
+      pointer-events: none;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff4d6d;
+      transform: rotate(-45deg);
+      animation: pop 2s infinite ease-in-out;
+      opacity: 0;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff4d6d;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: 10px; top: 0; }
+
+    @keyframes pop {
+      0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+      50% { transform: scale(1.2) rotate(-45deg); opacity: 1; }
+      100% { transform: scale(0) rotate(-45deg); opacity: 0; }
+    }
+
+    .heart:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+    .heart:nth-child(2) { top: 30%; left: 70%; animation-delay: 0.5s; }
+    .heart:nth-child(3) { top: 50%; left: 40%; animation-delay: 1s; }
+    .heart:nth-child(4) { top: 80%; left: 60%; animation-delay: 1.5s; }
+    .heart:nth-child(5) { top: 20%; left: 80%; animation-delay: 2s; }
+    .heart:nth-child(6) { top: 60%; left: 10%; animation-delay: 2.5s; }
+
+    .confession-text {
+      font-size: 16px;
+      max-width: 90%;
+      margin: 0 auto;
+      color: #333;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+      line-height: 1.6;
+    }
+
+    iframe {
+      margin-top: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    @media (max-width: 500px) {
+      .title {
+        font-size: 36px;
+      }
+
+      .btn-heart {
+        font-size: 60px;
+      }
+
+      .btn {
+        font-size: 16px;
+        padding: 8px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Control -->
+  <input type="radio" name="page" id="page1" checked>
+  <input type="radio" name="page" id="page2">
+  <input type="radio" name="page" id="page3">
+  <input type="radio" name="page" id="page4">
+
+  <!-- Floating Hearts -->
+  <div class="heart-float">
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+  </div>
+
+  <!-- Page 1 -->
+  <div class="page page1">
+    <h1 class="title">Welcome 💖</h1>
+    <label for="page2" class="btn-heart" title="Start">❤️</label>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page page2">
+    <h1 class="title">Confession 💌</h1>
+    <div class="confession-text">
+      <p>Hi, I've been wanting to say something...</p>
+      <p>Every time I see you, my heart skips a little.</p>
+      <p>You're on my mind more often than I admit, and I think it's time you knew.</p>
+    </div>
+    <div class="nav-buttons">
+      <label for="page1" class="btn">◀ Back</label>
+      <label for="page3" class="btn">Next ▶</label>
+    </div>
+  </div>
+
+  <!-- Page 3 -->
+  <div class="page page3">
+    <h1 class="title">How It Started 🌸</h1>
+    <div class="confession-text">
+      <p>It all started with a glance... and a smile.</p>
+      <p>The way you laugh, the way you care, the way you just... exist — it's beautiful.</p>
+      <p>Somehow, somewhere between the jokes and the conversations, I started falling for you.</p>
+    </div>
+    <div class="nav-buttons">
+      <label for="page2" class="btn">◀ Back</label>
+      <label for="page4" class="btn">Next ▶</label>
+    </div>
+  </div>
+
+  <!-- Page 4 -->
+  <div class="page page4">
+    <h1 class="title">This Is For You 🎵</h1>
+    <div class="confession-text">
+      <p>Here's a little playlist that reminds me of you.</p>
+      <p>I hope it makes you feel even a little of what you make me feel.</p>
+    </div>
+    <iframe
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+      height="80"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    ></iframe>
+    <div class="nav-buttons">
+      <label for="page3" class="btn">◀ Back</label>
+    </div>
+    <p style="color:#333; margin-top: 20px;">Text me if this made you smile 😊</p>
+  </div>
+
+</body>
+</html>
